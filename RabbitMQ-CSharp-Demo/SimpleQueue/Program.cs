@@ -19,7 +19,7 @@ namespace SimpleQueue
 
         private static void Send()
         {
-            using (var connection = GetConnectionFactory.CreateConnection())
+            using (var connection = _connectionFactory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
                 channel.QueueDeclare(queue: "SimpleQueue", durable: false, exclusive: false, autoDelete: false, arguments: null);
@@ -37,7 +37,7 @@ namespace SimpleQueue
 
         private static void Receive()
         {
-            using (var connection = GetConnectionFactory.CreateConnection())
+            using (var connection = _connectionFactory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
                 channel.QueueDeclare(queue: "SimpleQueue", durable: false, exclusive: false, autoDelete: false, arguments: null);
@@ -57,7 +57,7 @@ namespace SimpleQueue
             }
         }
 
-        private static ConnectionFactory GetConnectionFactory
+        private static ConnectionFactory _connectionFactory
         {
             get
             {
